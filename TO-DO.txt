@@ -1,0 +1,26 @@
+Fazer uma vitrine onde o usuário pode olhar itens e comprar:
+
+[ ] Todos os objetos devem ser desenhados com WebGL em 3D
+[ ] Deve ter controles para animar os objetos:
+        - Rotação
+        - Zoom
+[ ] Animação pré-definida da câmera usando curvas
+[ ] Textura ou cor
+[ ] Use modelos que tenham textura e modelos sem textura com cor única
+[ ] O usuário pode clicar no menu e trocar a textura e cor. Para as textura você pode abrir elas num editor de imagens e só trocar alguma cor na figura
+[ ] Todos os objetos que o usuário comprar devem aparecer numa visão única, por exemplo, se for uma loja de carros todos os carros comprados devem aparecer dentro de uma garagem ou pátio que representa o carrinho de compras.
+[ ] O menu principal de navegação da página deve usar WebGL, mas não precisa ser 3D
+[ ] O fundo da página deve ser uma animação em WebGL.
+[ ] Fazer um vídeo explicando o código e mostrando o funcionamento. Mandar um link para o vídeo e um link para um zip com o código.
+
+
+* Procure na web por objetos 3D gratuitos, use as palavras chaves webgl, free obj, 3D free files, etc. Exemplo de site: https://sketchfab.com/
+* Compartilhe no Discord os links interessantes
+* Nesses links tem como carregar os arquivos: https://webgl2fundamentals.org/webgl/lessons/webgl-load-obj.html e https://webgl2fundamentals.org/webgl/lessons/webgl-load-obj-w-mtl.html
+* Faça esse trabalho não só pensando na disciplina, mas pensando que pode mostrar ele como cartão de visita das suas habilidades para o mercado.
+
+
+* Faremos 1:1  onde vou fazer perguntas sobre o que foi feito, se não conseguir responder vou pedir um novo trabalho. Posso pedir alguma modificação no código durante o 1:1
+
+* Primeira coisa que deve aparecer no vídeo é uma lista (texto) do que funciona e do que não funciona. Essa lista deve ser com base no que é pedido no link acima. Vídeo que não começa com isso não será avaliado.
+
