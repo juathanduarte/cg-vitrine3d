@@ -48,6 +48,14 @@ nav a {
   font-size: 25px;
 }
 
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav i {
+  color: red;
+}
+
 #cart-button {
   background-color: #fff;
   border: none;
@@ -144,6 +152,12 @@ a {
   margin-bottom: 10px;
 }
 
+.item canvas {
+  max-width: 100%;
+  max-height: 200px;
+  margin-bottom: 10px;
+}
+
 .item button {
   margin: 5px;
   padding: 10px 20px;
@@ -180,5 +194,20 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px; /* ajuste a altura conforme necessário */
+  align-self: flex-end;
+  /* height: 100px; */
+  border-top: 1px solid #000;
+}
+
+#barrels {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  border: none;
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(5px);
 }

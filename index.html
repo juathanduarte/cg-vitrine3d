@@ -7,6 +7,11 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <link
+      rel="stylesheet"
+      href="libraries/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+
     <title>Trabalho 01 - Computação Gráfica</title>
 
     <style>
@@ -16,46 +21,30 @@
 
   <body>
     <header>
+      <canvas id="barrels"></canvas>
+      <!-- <canvas id="skull"></canvas> -->
+
       <div class="header-container">
         <h1>Trabalho 01 - Computação Gráfica</h1>
-        <!-- <div class="subheader"> -->
         <nav>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
             <li>
               <button id="cart-button">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fa fa-shopping-cart" area-hidden="true"></i>
                 <span id="cart-count">0</span>
               </button>
             </li>
           </ul>
         </nav>
-
-        <!-- <h2>
-            <span style="text-decoration: underline">Aluno:</span> Juathan
-            Coelho Duarte | 19200989
-          </h2>
-
-          <h2>
-            <span style="text-decoration: underline">Professor:</span> Rafael
-            Piccin Torchelsen
-          </h2>
-          <h2>
-            <span style="text-decoration: underline">Disciplina:</span>
-            Computação Gráfica | Ciência da Computação | UFPel
-          </h2> -->
-        <!-- </div> -->
       </div>
     </header>
 
     <div class="container-items">
       <div class="item">
-        <img
-          src="https://via.placeholder.com/300x200.png?text=Item+1"
-          alt="Item 1"
-        />
+        <canvas id="corona"></canvas>
         <h3>Item 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <button onclick="incrementCart()">Comprar</button>
@@ -81,8 +70,8 @@
       </div>
       <div class="item">
         <img
-          src="https://via.placeholder.com/300x200.png?text=Item+3"
-          alt="Item 3"
+          src="https://via.placeholder.com/300x200.png?text=Item+2"
+          alt="Item 2"
         />
         <h3>Item 3</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -105,7 +94,12 @@
       </div>
     </footer>
 
-    <!-- <script src="js/script.js"></script> -->
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+    <script type="module" src="js/barrels.js"></script>
+    <script type="module" src="js/corona.js"></script>
+    <!-- <script type="module" src="js/skull.js"></script> -->
+
     <script>
       function incrementCart() {
         let cartCount = document.getElementById("cart-count");
