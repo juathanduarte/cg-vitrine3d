@@ -18,6 +18,69 @@ body {
 header {
   justify-content: center;
   align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+#cart-button {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  position: relative;
+}
+
+#cart-button:hover {
+  cursor: pointer;
+}
+
+#cart-button i {
+  color: #333;
+}
+
+#cart-count {
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  text-align: center;
+  width: 18px;
+}
+
+/* header {
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   background-color: #fff;
   border-radius: 10px;
@@ -25,17 +88,10 @@ header {
   padding: 20px;
 }
 
-.header-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .subheader {
   display: flex;
   align-items: 0;
-}
+} */
 
 h1 {
   margin: 0;

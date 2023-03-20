@@ -18,8 +18,22 @@
     <header>
       <div class="header-container">
         <h1>Trabalho 01 - Computação Gráfica</h1>
-        <div class="subheader">
-          <h2>
+        <!-- <div class="subheader"> -->
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li>
+              <button id="cart-button">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- <h2>
             <span style="text-decoration: underline">Aluno:</span> Juathan
             Coelho Duarte | 19200989
           </h2>
@@ -31,8 +45,8 @@
           <h2>
             <span style="text-decoration: underline">Disciplina:</span>
             Computação Gráfica | Ciência da Computação | UFPel
-          </h2>
-        </div>
+          </h2> -->
+        <!-- </div> -->
       </div>
     </header>
 
@@ -44,7 +58,7 @@
         />
         <h3>Item 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button>Comprar</button>
+        <button onclick="incrementCart()">Comprar</button>
         <a
           href="https://via.placeholder.com/500x300.png?text=Item+1"
           target="_blank"
@@ -58,7 +72,7 @@
         />
         <h3>Item 2</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button>Comprar</button>
+        <button onclick="incrementCart()">Comprar</button>
         <a
           href="https://via.placeholder.com/500x300.png?text=Item+2"
           target="_blank"
@@ -72,7 +86,7 @@
         />
         <h3>Item 3</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button>Comprar</button>
+        <button onclick="incrementCart()">Comprar</button>
         <a
           href="https://via.placeholder.com/500x300.png?text=Item+3"
           target="_blank"
@@ -92,5 +106,12 @@
     </footer>
 
     <!-- <script src="js/script.js"></script> -->
+    <script>
+      function incrementCart() {
+        let cartCount = document.getElementById("cart-count");
+        let cartCountValue = parseInt(cartCount.innerText);
+        cartCount.innerText = cartCountValue + 1;
+      }
+    </script>
   </body>
 </html>
