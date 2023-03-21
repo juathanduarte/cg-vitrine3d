@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/style-about.css" />
+    <link rel="stylesheet" href="css/style-contact.css" />
 
     <link
       rel="stylesheet"
@@ -21,6 +21,8 @@
 
   <body>
     <header>
+      <canvas id="barrels"></canvas>
+
       <div class="header-container">
         <h1>About</h1>
         <!-- <div class="subheader"> -->
@@ -36,21 +38,6 @@
 
     <div class="container-about">
       <div class="infos">
-        <h2>Objetivo</h2>
-        <p>
-          O objetivo deste trabalho é a implementação de uma vitrine onde o
-          usuário pode olhar itens e comprar.
-        </p>
-
-        <h2>Aluno</h2>
-        <p>Juathan Coelho Duarte - 19200989</p>
-
-        <h2>Professor</h2>
-        <p>Rafael Piccin TOrchelsen</p>
-
-        <h2>Disciplina</h2>
-        <p>Computação Gráfica | Universidade Federal de Pelotas - UFPel</p>
-
         <h2>Contato</h2>
         <p>
           <a
@@ -78,7 +65,9 @@
       </div>
     </footer>
 
-    <!-- <script src="js/script.js"></script> -->
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+    <script type="module" src="js/barrels.js"></script>
     <script>
       function incrementCart() {
         let cartCount = document.getElementById("cart-count");

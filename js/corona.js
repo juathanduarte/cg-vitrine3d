@@ -296,6 +296,7 @@ async function main() {
     // compute the world matrix once since all parts
     // are at the same space.
     let u_world = m4.yRotation(time);
+    u_world = m4.xRotate(u_world, 4.7);
     u_world = m4.translate(u_world, ...objOffset);
 
     for (const { bufferInfo, material } of parts) {

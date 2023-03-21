@@ -21,9 +21,10 @@
 
   <body>
     <header>
+      <canvas id="barrels"></canvas>
+
       <div class="header-container">
         <h1>About</h1>
-        <!-- <div class="subheader"> -->
         <nav>
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -63,7 +64,9 @@
       </div>
     </footer>
 
-    <!-- <script src="js/script.js"></script> -->
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+    <script type="module" src="js/barrels.js"></script>
     <script>
       function incrementCart() {
         let cartCount = document.getElementById("cart-count");
