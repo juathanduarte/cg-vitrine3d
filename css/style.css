@@ -74,26 +74,6 @@ nav a:hover {
   width: 18px;
 }
 
-h1 {
-  margin: 0;
-  font-weight: bold;
-}
-
-h2 {
-  margin: 0;
-  margin-right: 10px;
-}
-
-h2 {
-  margin-right: 20px;
-  font-size: 14px;
-}
-
-a {
-  text-decoration: none;
-  color: #333;
-}
-
 /* BODY */
 
 body {
@@ -105,46 +85,10 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Estilo para a div que aparece ao clicar no botão */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Estilo para o conteúdo da div */
-.popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilo para o botão de fechar */
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-/* Estilo para o fundo da página */
 body {
   overflow: hidden;
 }
 
-/* Estilo para quando a div estiver visível */
 body.popup-visible {
   overflow: hidden;
 }
@@ -169,6 +113,9 @@ body.popup-visible .popup {
   width: 300px;
   height: 534px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item .buy-button {
@@ -199,6 +146,37 @@ body.popup-visible .popup {
 
 .item .open-button:hover {
   background-color: #006f9e;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 /* FOOTER */

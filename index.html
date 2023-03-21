@@ -47,6 +47,7 @@
           desde 1925. Ela é conhecida por sua aparência distintiva, com uma
           garrafa transparente e uma fatia de limão ou lima na boca da garrafa.
         </p>
+
         <button class="buy-button" onclick="incrementCart()">Comprar</button>
         <button class="open-button" onClick="openPopup()">
           Ver imagem maior
@@ -87,9 +88,19 @@
     </div>
 
     <div class="popup">
+      <canvas id="fPerspective"></canvas>
       <div class="popup-content">
-        <h2>Título da div</h2>
-        <p>Conteúdo da div</p>
+        <div id="uiContainer">
+          <div id="ui">
+            <div id="fudgeFactor"></div>
+            <div id="x"></div>
+            <div id="y"></div>
+            <div id="z"></div>
+            <div id="angleX"></div>
+            <div id="angleY"></div>
+            <div id="angleZ"></div>
+          </div>
+        </div>
         <button class="close-button" onClick="closePopup()">Fechar div</button>
       </div>
     </div>
@@ -106,10 +117,12 @@
 
     <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
     <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
     <script type="module" src="js/barrels.js"></script>
     <script type="module" src="js/corona.js"></script>
     <script type="module" src="js/beer_bottle.js"></script>
     <script type="module" src="js/oz_beer.js"></script>
+    <script type="module" src="js/fPerspective.js"></script>
 
     <script>
       function incrementCart() {
