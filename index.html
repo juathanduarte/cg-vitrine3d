@@ -4,14 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="css/style.css" />
-
     <link
       rel="stylesheet"
       href="libraries/font-awesome-4.7.0/css/font-awesome.min.css"
     />
-
     <title>Trabalho 01 - Computação Gráfica</title>
 
     <style>
@@ -22,7 +19,6 @@
   <body>
     <header>
       <canvas id="barrels"></canvas>
-      <!-- <canvas id="skull"></canvas> -->
 
       <div class="header-container">
         <h1>Trabalho 01 - Computação Gráfica</h1>
@@ -51,12 +47,10 @@
           desde 1925. Ela é conhecida por sua aparência distintiva, com uma
           garrafa transparente e uma fatia de limão ou lima na boca da garrafa.
         </p>
-        <button onclick="incrementCart()">Comprar</button>
-        <a
-          href="https://via.placeholder.com/500x300.png?text=Item+1"
-          target="_blank"
-          >Ver imagem maior</a
-        >
+        <button class="buy-button" onclick="incrementCart()">Comprar</button>
+        <button class="open-button" onClick="openPopup()">
+          Ver imagem maior
+        </button>
       </div>
       <div class="item">
         <canvas id="beer_bottle"></canvas>
@@ -68,13 +62,12 @@
           é responsável pelo sabor característico e bem equilibrado, com notas
           frutadas sutis.
         </p>
-        <button onclick="incrementCart()">Comprar</button>
-        <a
-          href="https://via.placeholder.com/500x300.png?text=Item+2"
-          target="_blank"
-          >Ver imagem maior</a
-        >
+        <button class="buy-button" onclick="incrementCart()">Comprar</button>
+        <button class="open-button" onClick="openPopup()">
+          Ver imagem maior
+        </button>
       </div>
+
       <div class="item">
         <canvas id="oz_beer"></canvas>
         <h3>Oz</h3>
@@ -86,12 +79,18 @@
           frutadas sutis.
         </p>
 
-        <button onclick="incrementCart()">Comprar</button>
-        <a
-          href="https://via.placeholder.com/500x300.png?text=Item+3"
-          target="_blank"
-          >Ver imagem maior</a
-        >
+        <button class="buy-button" onclick="incrementCart()">Comprar</button>
+        <button class="open-button" onClick="openPopup()">
+          Ver imagem maior
+        </button>
+      </div>
+    </div>
+
+    <div class="popup">
+      <div class="popup-content">
+        <h2>Título da div</h2>
+        <p>Conteúdo da div</p>
+        <button class="close-button" onClick="closePopup()">Fechar div</button>
       </div>
     </div>
 
@@ -111,13 +110,20 @@
     <script type="module" src="js/corona.js"></script>
     <script type="module" src="js/beer_bottle.js"></script>
     <script type="module" src="js/oz_beer.js"></script>
-    <!-- <script type="module" src="js/skull.js"></script> -->
 
     <script>
       function incrementCart() {
         let cartCount = document.getElementById("cart-count");
         let cartCountValue = parseInt(cartCount.innerText);
         cartCount.innerText = cartCountValue + 1;
+      }
+
+      function openPopup() {
+        document.querySelector("body").classList.add("popup-visible");
+      }
+
+      function closePopup() {
+        document.querySelector("body").classList.remove("popup-visible");
       }
     </script>
   </body>

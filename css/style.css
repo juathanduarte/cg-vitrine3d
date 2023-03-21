@@ -7,23 +7,12 @@
   font-family: "Sono", sans-serif;
 }
 
-body {
-  display: grid;
-  grid-template-rows: 80px 1fr 80px;
-  height: 100vh;
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
-  background-color: #f5f5f5;
-}
-
 /* HEADER */
 
 header {
-  justify-content: center;
-  align-items: center;
   background-color: #333;
-  color: #fff;
-  padding: 10px;
+  color: white;
+  text-align: center;
 }
 
 .header-container {
@@ -53,10 +42,6 @@ nav a {
 
 nav a:hover {
   text-decoration: underline;
-}
-
-nav i {
-  color: red;
 }
 
 #cart-button {
@@ -109,15 +94,66 @@ a {
   color: #333;
 }
 
-/* ITEMS */
+/* BODY */
 
-/* justify-content: center;
-  align-items: center;
-  margin-top: 10px;
+body {
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+  height: 100vh;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Estilo para a div que aparece ao clicar no botão */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Estilo para o conteúdo da div */
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px; */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o botão de fechar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Estilo para o fundo da página */
+body {
+  overflow: hidden;
+}
+
+/* Estilo para quando a div estiver visível */
+body.popup-visible {
+  overflow: hidden;
+}
+body.popup-visible .popup {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ITEMS */
 
 .container-items {
   display: flex;
@@ -135,7 +171,7 @@ a {
   text-align: center;
 }
 
-.item button {
+.item .buy-button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #4caf50;
@@ -145,11 +181,7 @@ a {
   cursor: pointer;
 }
 
-.item button:hover {
-  background-color: #3e8e41;
-}
-
-.item a {
+.item .open-button {
   display: inline-block;
   margin: 5px;
   padding: 10px 20px;
@@ -161,7 +193,11 @@ a {
   text-decoration: none;
 }
 
-.item a:hover {
+.item .buy-button:hover {
+  background-color: #3e8e41;
+}
+
+.item .open-button:hover {
   background-color: #006f9e;
 }
 
