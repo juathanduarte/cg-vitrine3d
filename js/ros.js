@@ -247,7 +247,7 @@ function makeIndexedIndicesFn(arrays) {
 async function main() {
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
-  const canvas = document.getElementById("#corona");
+  const canvas = document.getElementById("#ros");
   const gl = canvas.getContext("webgl2");
   if (!gl) {
     return;
@@ -330,7 +330,7 @@ async function main() {
   // compiles and links the shaders, looks up attribute and uniform locations
   const meshProgramInfo = twgl.createProgramInfo(gl, [vs, fs]);
 
-  const objHref = "../objs/corona/Corona.obj";
+  const objHref = "../objs/ros/beerbottle_belgian.obj";
   const response = await fetch(objHref);
   const text = await response.text();
   const obj = parseOBJ(text);
@@ -338,7 +338,7 @@ async function main() {
   const matTexts = await Promise.all(
     obj.materialLibs.map(async (filename) => {
       // const matHref = new URL(filename, baseHref).href;
-      const response = await fetch("../objs/corona/Corona.mtl");
+      const response = await fetch("../objs/ros/beerbottle_belgian.mtl");
       return await response.text();
     })
   );

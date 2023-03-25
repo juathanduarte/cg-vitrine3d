@@ -12,5 +12,5 @@ newmtl 01___Default
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka C:\Users\Administrador\Desktop\Corona\BotellaText.jpg
-	map_Kd C:\Users\Administrador\Desktop\Corona\BotellaText.jpg
+	map_Ka BotellaText.jpg
+	map_Kd BotellaText.jpg

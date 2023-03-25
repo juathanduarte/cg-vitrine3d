@@ -141,7 +141,7 @@ function main() {
   webglLessonsUI.setupSlider("#fudgeFactor", {
     value: fudgeFactor,
     slide: updateFudgeFactor,
-    max: 2,
+    max: 3,
     step: 0.001,
     precision: 3,
   });
