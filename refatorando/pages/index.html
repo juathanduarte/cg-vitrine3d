@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="libraries/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <title>Trabalho 01 - Computação Gráfica</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Sono:wght@200&display=swap");
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-container">
+        <h1>Trabalho 01 - Computação Gráfica</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <button id="cart-button">
+                <i class="fa fa-shopping-cart" area-hidden="true"></i>
+                <span id="cart-count">0</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <canvas id="background"></canvas>
+
+    <div class="container-items" id="container-items"></div>
+
+    <footer>
+      <div class="footer-container">
+        <small>
+          Copyright © Juathan Coelho Duarte | juathan.cduarte@inf.ufpel.edu.br
+        </small>
+      </div>
+    </footer>
+
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+
+    <script src="https://webgl2fundamentals.org/webgl/resources/twgl-full.min.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/m4.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/flattened-primitives.js"></script>
+    <script src="../js/webgl.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/parses.js"></script>
+    <script src="../js/object.js"></script>
+
+    <script src="../js/background.js"></script>
+
+    <script>
+      function incrementCart() {
+        let cartCount = document.getElementById("cart-count");
+        let cartCountValue = parseInt(cartCount.innerText);
+        cartCount.innerText = cartCountValue + 1;
+      }
+    </script>
+  </body>
+</html>

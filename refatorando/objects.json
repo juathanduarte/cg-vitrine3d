@@ -1,0 +1,20 @@
+[
+  {
+    "name": "King Fisher",
+    "objHref": "../objs/kingfisheer/kingfisher.obj",
+    "textures": [
+      {
+        "index": "1",
+        "inputColor": "#00ff44"
+      },
+      {
+        "index": "2",
+        "inputColor": "#ff3700"
+      },
+      {
+        "index": "3",
+        "inputColor": "#ffd000"
+      }
+    ]
+  }
+]
