@@ -18,19 +18,21 @@ body {
 
 /* HEADER */
 
+/* HEADER */
+
 header {
   background-color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: white;
+  text-align: center;
 }
 
 .header-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  padding: 10px 0;
 }
 
 nav ul {
@@ -77,16 +79,20 @@ nav a:hover {
 /* FOOTER */
 
 footer {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px; /* ajuste a altura conforme necessário */
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  bottom: 0;
 }
 
-#barrels {
+#background {
   position: fixed;
   width: 100vw;
-  height: 100vh;
   left: 0;
   top: 0;
   z-index: -1;

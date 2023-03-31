@@ -27,7 +27,7 @@ class Obj {
       return;
     }
     twgl.setAttributePrefix("a_");
-    this.meshProgramInfo = twclreateProgramInfo(this.gl, [
+    this.meshProgramInfo = twgl.createProgramInfo(this.gl, [
       vertexShaderSource,
       fragmentShaderSource,
     ]);
@@ -38,7 +38,7 @@ class Obj {
   }
 
   insertHTML() {
-    var ulOptions = `<ul id="my-select${this.index}" class="horizontal-select">`;
+    var ulOptions = `<ul id="my-select${this.index}" class="buttons-textures">`;
 
     this.textures.forEach((texture) => {
       texture.index == "1"
@@ -47,36 +47,6 @@ class Obj {
     });
 
     ulOptions += `</ul>`;
-
-    {
-      /* <canvas id="#kingfisher"></canvas>
-        <h3>King Fisher</h3>
-        <div class="group">
-          <div>
-            <p>Rotação Y</p>
-            <input type="range" min="0" max="360" value="0" />
-          </div>
-
-          <div>
-            <p>Rotação X</p>
-            <input type="range" min="0" max="720" value="0" />
-          </div>
-
-          <div>
-            <p>Zoom</p>
-            <input type="range" min="0" max="40" value="0" />
-          </div>
-        </div>
-
-        <div class="color-buttons">
-          <button class="color-button red"></button>
-          <button class="color-button green"></button>
-          <button class="color-button yellow"></button>
-        </div>
-
-        <button class="buy-button" onclick="incrementCart()">Comprar</button>
-      </div> */
-    }
 
     const card = `
       <div class="product">
@@ -161,8 +131,7 @@ class Obj {
       "button-cart" + String(this.index)
     );
     buttonCart.addEventListener("click", () => {
-      objsCart.push(new objCart(this.objHref, this.index, this.textureIndex));
-      delete objsCart[0];
+      buyObject(this.name, this.objHref, this.textureIndex);
     });
 
     const buttonAnimation = document.getElementById("ani" + String(this.index));
@@ -172,8 +141,6 @@ class Obj {
       if (!this.ani) {
         this.cameraPosition[0] = 0;
         this.pos = 0;
-
-        // console.log(this.cameraPosition);
       }
     });
   }
@@ -208,7 +175,6 @@ class Obj {
 
   async loadTexture() {
     const baseHref = new URL(this.objHref, window.location.href);
-    console.log(baseHref);
     const matTexts = await Promise.all(
       this.obj.materialLibs.map(async (filename) => {
         const matHref = new URL(filename, baseHref).href;
@@ -359,14 +325,12 @@ class Obj {
 
     const up = [0, 1, 0];
 
-    //animação aqui
-    //var a = 0;
-    //this.targetAngleRadians += this.rotationSpeed / 60.0;
-    //this.cameraPosition[0] = Math.sin(this.targetAngleRadians) * this.targetRadius;
-    //this.cameraPosition[2] = Math.cos(this.targetAngleRadians) * this.targetRadius;
-    if (this.ani) this.animation();
+    if (this.ani) this.rotateObject();
 
-    //console.log(this.pos)
+    //função para camera
+    // equação da curva que vou usar
+    // params eu vou dizer
+
     // Compute the camera's matrix using look at.
     const camera = m4.lookAt(this.cameraPosition, this.cameraTarget, up);
     //const camera = m4.lookAt(cameraPosition, this.objOffset, up);
@@ -410,32 +374,8 @@ class Obj {
   }
 
   rotateObject() {
-    this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-
-    var transformMatrix = mat4.create();
-    mat4.rotate(transformMatrix, transformMatrix, this.xRotation, [1, 0, 0]);
-
-    var transformMatrixLocation = this.gl.getUniformLocation(
-      shaderProgram,
-      "u_transformMatrix"
-    );
-    this.gl.uniformMatrix4fv(transformMatrixLocation, false, transformMatrix);
-
-    this.gl.drawArrays(this.gl.TRIANGLES, 0, vertexCount);
-
-    rotation += 0.01;
-    requestAnimationFrame(this.rotateObject);
+    this.yRotation += this.rotationSpeed / 60.0;
   }
-
-  // animation() {
-  //   if (this.pos >= 4) this.direction = 1;
-  //   else if (this.pos <= -4) this.direction = 0;
-
-  //   if (this.direction == 0) this.pos += this.rotationSpeed / 60.0;
-  //   else if (this.direction == 1) this.pos -= this.rotationSpeed / 60.0;
-
-  //   this.cameraPosition[0] = this.pos;
-  // }
 }
 
 async function loadObjs() {

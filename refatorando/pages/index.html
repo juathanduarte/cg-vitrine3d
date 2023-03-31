@@ -25,20 +25,28 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li>
-              <button id="cart-button">
-                <i class="fa fa-shopping-cart" area-hidden="true"></i>
-                <span id="cart-count">0</span>
-              </button>
-            </li>
           </ul>
         </nav>
+        <div class="cart-icon-container">
+          <button class="cart-icon-button">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="cart-count">Carrinho</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <canvas id="background"></canvas>
 
     <div class="container-items" id="container-items"></div>
+
+    <div class="cart-popup">
+      <div class="cart-popup-content">
+        <h2>Itens no carrinho</h2>
+        <ul class="cart-items"></ul>
+        <button class="close-popup">Fechar</button>
+      </div>
+    </div>
 
     <footer>
       <div class="footer-container">
@@ -62,11 +70,35 @@
     <script src="../js/background.js"></script>
 
     <script>
+      var cartButton = document.querySelector(".cart-icon-button");
+      var cartCount = document.querySelector(".cart-count");
+      var cartIcon = document.querySelector(".cart-icon-button");
+      var popup = document.querySelector(".cart-popup");
+      var closePopup = document.querySelector(".close-popup");
+
+      closePopup.addEventListener("click", function () {
+        popup.style.display = "none";
+      });
+
+      cartButton.addEventListener("click", function () {
+        cartCount.innerHTML = count;
+      });
+
       function incrementCart() {
         let cartCount = document.getElementById("cart-count");
         let cartCountValue = parseInt(cartCount.innerText);
         cartCount.innerText = cartCountValue + 1;
       }
+
+      cartIcon.addEventListener("click", function () {
+        popup.style.display = "block";
+      });
+
+      popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+          popup.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
