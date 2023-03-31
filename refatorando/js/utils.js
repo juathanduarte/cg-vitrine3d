@@ -22,5 +22,4 @@ const totalPrice = () => {
   cart.forEach((item) => {
     total += Number(item.price);
   });
-  document.getElementById("total").innerHTML = `${total}`;
 };

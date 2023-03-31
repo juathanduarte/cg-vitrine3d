@@ -9,6 +9,7 @@ uniform mat4 u_projection;
 uniform mat4 u_view;
 uniform mat4 u_world;
 uniform vec3 u_viewWorldPosition;
+uniform vec3 u_translation;
 
 out vec3 v_normal;
 out vec3 v_tangent;
@@ -18,7 +19,7 @@ out vec4 v_color;
 
 void main() {
   vec4 worldPosition = u_world * a_position;
-  gl_Position = u_projection * u_view * worldPosition;
+  gl_Position = u_projection * u_view * worldPosition + vec4(u_translation, 0.0);
   v_surfaceToView = u_viewWorldPosition - worldPosition.xyz;
 
   mat3 normalMat = mat3(u_world);

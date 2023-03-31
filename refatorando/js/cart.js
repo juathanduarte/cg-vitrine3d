@@ -1,6 +1,6 @@
 class Obj {
   constructor(obj, index) {
-    this.objHref = obj.objHref;
+    this.objHref = obj.href;
     this.index = index;
     this.name = obj.name;
     this.textures = obj.textures;
@@ -9,10 +9,20 @@ class Obj {
 
     this.cameraTarget;
     this.cameraPosition;
+    this.linePosition = Math.random() > 0.5 ? 1 * index : -1 * index;
 
-    this.position = 0;
-    this.animation = false;
-    this.direction = 0;
+    this.targetAngleRadians = 100;
+    this.targetRadius = 360;
+    this.fieldOfViewRadians = degToRad(60);
+    this.rotationSpeed = 4.2;
+    this.cameraAngleRadians = Math.PI / 4;
+
+    this.isAnimated = true;
+
+    this.a = 4; // raio horizontal
+    this.b = 4; // raio vertical
+    this.c = 3; // raio de profundidade
+    this.t = 0; // parâmetro da curva
 
     this.yRotation = degToRad(0);
     this.xRotation = degToRad(0);
@@ -50,15 +60,13 @@ class Obj {
 
     // figure out how far away to move the camera so we can likely
     // see the object.
-    const radius = 10;
+    this.radius = m4.length(range) * 4;
+    this.c = this.radius;
+    this.cameraTarget = [this.linePosition, 1, 2];
+    this.cameraPosition = m4.addVectors(this.cameraTarget, [0, 0, this.radius]);
 
-    const random = Math.random() * 15;
-    this.cameraTarget = [random, 1, random];
-    this.cameraPosition = m4.addVectors(this.cameraTarget, [0, 0, radius]);
-    // Set zNear and zFar to something hopefully appropriate
-    // for the size of this object.
-    this.zNear = radius / 50;
-    this.zFar = radius * 3;
+    this.zNear = this.radius / 50;
+    this.zFar = this.radius * 3;
 
     requestAnimationFrame(this.render);
   }
@@ -68,10 +76,12 @@ class Obj {
     const matTexts = await Promise.all(
       this.obj.materialLibs.map(async (filename) => {
         const matHref = new URL(filename, baseHref).href;
+        // console.log("matHref", matHref);
         const novaString =
           matHref.substring(0, matHref.indexOf(".mtl")) +
-          this.textureIndex +
+          this.textures +
           ".mtl";
+
         const response = await fetch(novaString);
         return await response.text();
       })
@@ -198,6 +208,8 @@ class Obj {
   render() {
     twgl.resizeCanvasToDisplaySize(this.gl.canvas);
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+    // console.log("this.gl.canvas.width", this.gl.canvas.width);
+    // console.log("this.gl.canvas.height", this.gl.canvas.height);
     this.gl.enable(this.gl.DEPTH_TEST);
 
     const fieldOfViewRadians = degToRad(60);
@@ -210,6 +222,8 @@ class Obj {
     );
 
     const up = [0, 1, 0];
+
+    if (this.isAnimated) this.animation();
 
     // Compute the camera's matrix using look at.
     const camera = m4.lookAt(this.cameraPosition, this.cameraTarget, up);
@@ -252,21 +266,36 @@ class Obj {
     }
     requestAnimationFrame(this.render);
   }
+  animation() {
+    const x = this.a * Math.cos(this.t);
+    const y = this.b * Math.sin(this.t);
+    const z = this.c * Math.sin(this.t);
+
+    this.cameraPosition[0] = x;
+    this.cameraPosition[1] = y;
+    this.cameraPosition[2] = z;
+
+    this.t += 0.01;
+  }
 }
 
 async function loadObjs() {
   //load the cart from the local storage
   var cart = JSON.parse(localStorage.getItem("cart"));
-  const arrayObjs = [];
+  // console.log(cart);
+
+  const arrayItems = [];
+
   //change the innerHTML of the total
   if (cart == null) {
     cart = [];
   }
-  document.getElementById("total").innerHTML = `${cart.length}`;
 
+  //create the objects
   cart.forEach((item, indice) => {
-    arrayObjs.push(new Obj(item, indice));
+    arrayItems.push(new Obj(item, indice));
   });
+
   totalPrice();
 }
 

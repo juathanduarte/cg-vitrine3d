@@ -35,19 +35,24 @@
       </div>
     </header>
 
-    <div style="position: relative">
-      <div class="overlay"></div>
-      <canvas id="canvas" width="1920" height="809"></canvas>
-    </div>
-
     <div class="content">
-      <div>
-        <canvas></canvas>
-      </div>
-      <!-- <div class="items-list" id="-itemsList">
+      <!-- <div class="price">
         <p>Total Price: $ <span id="totalPrice"></span></p>
       </div> -->
+      <canvas id="cart" width="1100px" height="450px"></canvas>
     </div>
+
+    <!-- <div class="content">
+        <div class="items-list" id="itemsList">
+          <p>Total Price: $ <span id="totalPrice"></span></p>
+        </div>
+        <div id="cart-conatiner" class="cart">
+          <canvas id="BgObj" width="800px" height="600px"></canvas>
+          <canvas id="cart" width="800px" height="600px"></canvas>
+        </div> -->
+
+    <div class="overlay"></div>
+    <canvas id="canvas"></canvas>
 
     <footer>
       <div class="footer-container">
@@ -68,10 +73,8 @@
     <script src="../js/webgl.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/parses.js"></script>
-    <!-- <script src="../js/object.js"></script> -->
-
-    <!-- <script src="../js/background.js"></script> -->
 
     <script src="../js/backgroundCart.js"></script>
+    <script type="module" src="../js/cart.js"></script>
   </body>
 </html>
