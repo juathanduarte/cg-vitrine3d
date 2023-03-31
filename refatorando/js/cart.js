@@ -17,15 +17,7 @@ class Obj {
     this.yRotation = degToRad(0);
     this.xRotation = degToRad(0);
 
-    this.targetAngleRadians = 100;
-    this.targetRadius = 360;
-    this.fieldOfViewRadians = degToRad(60);
-    this.rotationSpeed = 4.2;
-    this.cameraAngleRadians = Math.PI / 4;
-
-    this.insertHTML();
-
-    this.canvas = document.querySelector("#canvas" + String(index));
+    this.canvas = document.querySelector("#cart");
     this.gl = this.canvas.getContext("webgl2");
     if (!this.gl) {
       return;
@@ -39,112 +31,6 @@ class Obj {
     this.render = this.render.bind(this);
 
     this.main();
-  }
-
-  insertHTML() {
-    var ulOptions = `<ul id="my-select${this.index}" class="buttons-textures">`;
-
-    this.textures.forEach((texture) => {
-      texture.index == "1"
-        ? (ulOptions += `<li value="${texture.index}" id="op${texture.index}" class="selected" style="background-color: ${texture.inputColor}";></li>`)
-        : (ulOptions += `<li value="${texture.index}" id="op${texture.index}" style="background-color: ${texture.inputColor}";></li>`);
-    });
-
-    ulOptions += `</ul>`;
-
-    const card = `
-      <div class="product">
-        <canvas id="canvas${String(this.index)}"></canvas>
-          <div class="product-header">
-            <h2>${this.name} - ${this.price} $</h2>
-          </div>
-
-          <div class="animations">
-            <div>
-                <p>Rotação Y</p>
-                <input type="range" min="0" max="360" id="roty${String(
-                  this.index
-                )}" value="0">
-            </div>
-
-            <div>
-                <p>Rotação X</p>
-                <input type="range" min="0" max="720" id="rotx${String(
-                  this.index
-                )}" value="0">
-            </div>
-
-            <div>
-                <p>Zoom</p>
-                <input type="range" min="0" max="40" id="zoom${String(
-                  this.index
-                )}" value="0">
-                </div>
-            </div>
-
-            <div class="product-footer">
-              <button id="ani${String(this.index)}">Animar</button>
-              <button id="button-cart${String(this.index)}">Comprar</button>
-            </div>
-            ${ulOptions}
-        </div>
-    `;
-    const div = document.createElement("div");
-    div.innerHTML = card.trim();
-
-    const cardSection = document.getElementById("container-items");
-    cardSection.appendChild(div.firstChild);
-
-    //inputs range
-    const zoom = document.getElementById("zoom" + String(this.index));
-    zoom.addEventListener("input", () => {
-      const val = parseInt(zoom.value) * -0.04 + 5;
-      this.cameraPosition[2] = val;
-    });
-
-    const rotY = document.getElementById("roty" + String(this.index));
-    rotY.addEventListener("input", () => {
-      const val = degToRad(parseInt(rotY.value));
-      this.yRotation = val;
-    });
-
-    const rotX = document.getElementById("rotx" + String(this.index));
-    rotX.addEventListener("input", () => {
-      const val = degToRad(parseInt(rotX.value));
-      this.xRotation = val;
-    });
-
-    //select texture
-    var lis = document.querySelectorAll(`#my-select${this.index} li`);
-    lis.forEach((li) => {
-      li.addEventListener("click", () => {
-        lis.forEach((otherLi) => {
-          otherLi.classList.remove("selected");
-        });
-        li.classList.add("selected");
-
-        this.textureIndex = String(li.value);
-        this.loadTexture();
-      });
-    });
-
-    //button add to cart
-    const buttonCart = document.getElementById(
-      "button-cart" + String(this.index)
-    );
-    buttonCart.addEventListener("click", () => {
-      buyBeer(this.name, this.objHref, this.textureIndex, this.price);
-    });
-
-    const buttonAnimation = document.getElementById("ani" + String(this.index));
-    buttonAnimation.addEventListener("click", () => {
-      this.animation = !this.animation;
-
-      if (!this.animation) {
-        this.cameraPosition[0] = 0;
-        this.position = 0;
-      }
-    });
   }
 
   async main() {
@@ -164,13 +50,15 @@ class Obj {
 
     // figure out how far away to move the camera so we can likely
     // see the object.
-    const radius = m4.length(range) * 1.0;
-    this.cameraTarget = [0, 2, 0];
+    const radius = 10;
+
+    const random = Math.random() * 15;
+    this.cameraTarget = [random, 1, random];
     this.cameraPosition = m4.addVectors(this.cameraTarget, [0, 0, radius]);
     // Set zNear and zFar to something hopefully appropriate
     // for the size of this object.
     this.zNear = radius / 50;
-    this.zFar = radius * 5;
+    this.zFar = radius * 3;
 
     requestAnimationFrame(this.render);
   }
@@ -226,7 +114,7 @@ class Obj {
       ambient: [0, 0, 0],
       specular: [1, 1, 1],
       specularMap: textures.defaultWhite,
-      shininess: 400,
+      shininess: 200,
       opacity: 1,
     };
 
@@ -311,7 +199,6 @@ class Obj {
     twgl.resizeCanvasToDisplaySize(this.gl.canvas);
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.enable(this.gl.DEPTH_TEST);
-    this.gl.enable(this.gl.CULL_FACE);
 
     const fieldOfViewRadians = degToRad(60);
     const aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
@@ -324,24 +211,19 @@ class Obj {
 
     const up = [0, 1, 0];
 
-    if (this.animation) this.rotateObject();
-
-    //função para camera
-    // equação da curva que vou usar
-    // params eu vou dizer
-
     // Compute the camera's matrix using look at.
     const camera = m4.lookAt(this.cameraPosition, this.cameraTarget, up);
-    //const camera = m4.lookAt(cameraPosition, this.objOffset, up);
+
     // Make a view matrix from the camera matrix.
     const view = m4.inverse(camera);
 
     const sharedUniforms = {
-      u_lightDirection: m4.normalize([-1, 3, 5]),
+      u_lightDirection: m4.normalize([-1.5, 2, 2]),
       u_view: view,
       u_projection: projection,
       u_viewWorldPosition: this.cameraPosition,
     };
+
     this.gl.useProgram(this.meshProgramInfo.program);
 
     // calls gl.uniform
@@ -349,7 +231,6 @@ class Obj {
 
     // compute the world matrix once since all parts
     // are at the same space.
-
     let u_world = m4.identity();
     u_world = m4.translate(u_world, ...this.objOffset);
     u_world = m4.yRotation(this.yRotation);
@@ -371,22 +252,22 @@ class Obj {
     }
     requestAnimationFrame(this.render);
   }
-
-  rotateObject() {
-    this.yRotation += this.rotationSpeed / 60.0;
-  }
 }
 
 async function loadObjs() {
-  const response = await fetch("../data/objects.json");
-  const text = await response.text();
-  const objs = JSON.parse(text);
-
+  //load the cart from the local storage
+  var cart = JSON.parse(localStorage.getItem("cart"));
   const arrayObjs = [];
+  //change the innerHTML of the total
+  if (cart == null) {
+    cart = [];
+  }
+  document.getElementById("total").innerHTML = `${cart.length}`;
 
-  objs.forEach((obj, indice) => {
-    arrayObjs.push(new Obj(obj, indice));
+  cart.forEach((item, indice) => {
+    arrayObjs.push(new Obj(item, indice));
   });
+  totalPrice();
 }
 
 loadObjs();

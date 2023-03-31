@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/style-cart.css" />
     <link
       rel="stylesheet"
       href="../libraries/font-awesome-4.7.0/css/font-awesome.min.css"
@@ -19,7 +19,7 @@
   <body>
     <header>
       <div class="header-container">
-        <h1>Home</h1>
+        <h1>Carrinho</h1>
         <nav>
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -35,9 +35,10 @@
       </div>
     </header>
 
-    <canvas id="background"></canvas>
-
-    <div class="container-items" id="container-items"></div>
+    <div style="position: relative">
+      <div class="overlay"></div>
+      <canvas id="canvas" width="1903" height="809"></canvas>
+    </div>
 
     <footer>
       <div class="footer-container">
@@ -53,14 +54,15 @@
     <script src="https://webgl2fundamentals.org/webgl/resources/twgl-full.min.js"></script>
     <script src="https://webgl2fundamentals.org/webgl/resources/m4.js"></script>
     <script src="https://webgl2fundamentals.org/webgl/resources/flattened-primitives.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/webgl-utils.js"></script>
 
     <script src="../js/webgl.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/parses.js"></script>
-    <script src="../js/object.js"></script>
+    <!-- <script src="../js/object.js"></script> -->
 
-    <script src="../js/background.js"></script>
+    <!-- <script src="../js/background.js"></script> -->
 
-    <script type="module" src="../js/cart.js"></script>
+    <script src="../js/backgroundCart.js"></script>
   </body>
 </html>

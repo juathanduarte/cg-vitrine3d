@@ -1,6 +1,7 @@
 [
   {
     "name": "King Fisher",
+    "price": 4.99,
     "objHref": "../objs/kingfisheer/kingfisher.obj",
     "textures": [
       {
