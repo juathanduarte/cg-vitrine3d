@@ -37,6 +37,7 @@ function parseOBJ(text) {
   }
 
   function setGeometry() {
+    // Garantir que a geometria atual seja armazenada no geometries
     if (!geometry) {
       const position = [];
       const texcoord = [];
@@ -57,6 +58,7 @@ function parseOBJ(text) {
   }
 
   function addVertex(vert) {
+    // Adiciona um vértice no webglVertexData
     const ptn = vert.split("/");
     ptn.forEach((objIndexStr, i) => {
       if (!objIndexStr) {
@@ -183,37 +185,25 @@ async function main() {
   `;
 
   // compiles and links the shaders, looks up attribute and uniform locations
-  const meshProgramInfo = webglUtils.createProgramInfo(gl, [vs, fs]);
+  const meshProgramInfo = webglUtils.createProgramInfo(gl, [vs, fs]); // cria um objeto que contém informações sobre o shader
 
   const response = await fetch("../objs/barrels/barrels.obj");
   const text = await response.text();
   const obj = parseOBJ(text);
 
   const parts = obj.geometries.map(({ data }) => {
-    // Because data is just named arrays like this
-    //
-    // {
-    //   position: [...],
-    //   texcoord: [...],
-    //   normal: [...],
-    // }
-    //
-    // and because those names match the attributes in our vertex
-    // shader we can pass it directly into `createBufferInfoFromArrays`
-    // from the article "less code more fun".
-
-    // create a buffer for each array by calling
-    // gl.createBuffer, gl.bindBuffer, gl.bufferData
-    const bufferInfo = webglUtils.createBufferInfoFromArrays(gl, data);
+    // cria um array de objetos que contém informações sobre a geometria
+    const bufferInfo = webglUtils.createBufferInfoFromArrays(gl, data); // cria um objeto que contém informações sobre os buffers
     return {
       material: {
-        u_diffuse: [0.4, 0.2, 0, 1],
+        u_diffuse: [0.4, 0.2, 0, 1], // cor do objeto
       },
       bufferInfo,
     };
   });
 
   function getExtents(positions) {
+    // retorna os valores mínimos e máximos de cada eixo
     const min = positions.slice(0, 3);
     const max = positions.slice(0, 3);
     for (let i = 3; i < positions.length; i += 3) {
@@ -227,6 +217,7 @@ async function main() {
   }
 
   function getGeometriesExtents(geometries) {
+    // retorna os valores mínimos e máximos de cada eixo de todas as geometrias
     return geometries.reduce(
       ({ min, max }, { data }) => {
         const minMax = getExtents(data.position);
@@ -249,10 +240,10 @@ async function main() {
     m4.addVectors(extents.min, m4.scaleVector(range, 0.5)),
     -1
   );
-  const cameraTarget = [0, 0, 0];
+  const cameraTarget = [0, 0, 0]; // where the camera is looking
   // figure out how far away to move the camera so we can likely
   // see the object.
-  const radius = m4.length(range) * 1.2;
+  const radius = m4.length(range) * 1.2; // radius of the bounding sphere
   const cameraPosition = m4.addVectors(cameraTarget, [0, 0, radius]);
   // Set zNear and zFar to something hopefully appropriate
   // for the size of this object.
@@ -266,14 +257,14 @@ async function main() {
   function render(time) {
     time *= 0.001; // convert to seconds
 
-    webglUtils.resizeCanvasToDisplaySize(gl.canvas);
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.enable(gl.DEPTH_TEST);
-    gl.enable(gl.CULL_FACE);
+    webglUtils.resizeCanvasToDisplaySize(gl.canvas); // ajusta o tamanho do canvas para o tamanho da tela
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); // define a área do canvas que será usada para desenhar
+    gl.enable(gl.DEPTH_TEST); // habilita o teste de profundidade
+    gl.enable(gl.CULL_FACE); // habilita o culling
 
-    const fieldOfViewRadians = degToRad(60);
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-    const projection = m4.perspective(fieldOfViewRadians, aspect, zNear, zFar);
+    const fieldOfViewRadians = degToRad(60); // define o campo de visão
+    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight; // define a proporção do canvas
+    const projection = m4.perspective(fieldOfViewRadians, aspect, zNear, zFar); // define a matriz de projeção
 
     const up = [0, 1, 0];
     // Compute the camera's matrix using look at.
@@ -283,15 +274,16 @@ async function main() {
     const view = m4.inverse(camera);
 
     const sharedUniforms = {
+      // define as variáveis uniformes que serão usadas no shader
       u_lightDirection: m4.normalize([-1, 3, 5]),
       u_view: view,
       u_projection: projection,
     };
 
-    gl.useProgram(meshProgramInfo.program);
+    gl.useProgram(meshProgramInfo.program); // define o programa que será usado para desenhar
 
     // calls gl.uniform
-    webglUtils.setUniforms(meshProgramInfo, sharedUniforms);
+    webglUtils.setUniforms(meshProgramInfo, sharedUniforms); // define as variáveis uniformes que serão usadas no shader
 
     // compute the world matrix once since all parts
     // are at the same space.

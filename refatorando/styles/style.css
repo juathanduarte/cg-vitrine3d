@@ -70,12 +70,6 @@ nav a:hover {
   align-items: center;
 }
 
-/* .cart-icon-button:hover .cart-count {
-  background-color: #333;
-  border: 1px solid black;
-  color: #ffffff;
-} */
-
 .fa-shopping-cart {
   font-size: 24px;
   margin-right: 5px;

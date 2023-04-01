@@ -104,11 +104,12 @@ body {
 }
 
 .price {
-  display: flex;
+  position: absolute;
   color: white;
   font-size: 50px;
   font-weight: bold;
-  justify-content: flex-end;
+  bottom: 0;
+  margin-bottom: 20vh;
 }
 
 #canvas {
@@ -116,6 +117,34 @@ body {
   height: 100%;
   position: fixed;
   z-index: -2;
+}
+
+#limpar-localstorage {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cleanLocalStorage {
+  position: absolute;
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  bottom: 0;
+  margin-bottom: 15vh;
+}
+
+.textCleanLocalStorage {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  bottom: 0;
+  margin-bottom: 13vh;
 }
 
 /* FOOTER */

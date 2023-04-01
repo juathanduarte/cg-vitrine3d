@@ -1,14 +1,12 @@
 function parseOBJ(text) {
-  // because indices are base 1 let's just fill in the 0th data
+  // Analisa um modelo 3D em formato OBJ e retorna as informações necessárias para renderizá-lo.
   const objPositions = [[0, 0, 0]];
   const objTexcoords = [[0, 0]];
   const objNormals = [[0, 0, 0]];
   const objColors = [[0, 0, 0]];
 
-  // same order as `f` indices
   const objVertexData = [objPositions, objTexcoords, objNormals, objColors];
 
-  // same order as `f` indices
   let webglVertexData = [
     [], // positions
     [], // texcoords
@@ -26,14 +24,14 @@ function parseOBJ(text) {
   const noop = () => {};
 
   function newGeometry() {
-    // If there is an existing geometry and it's
-    // not empty then start a new one.
+    // Cria uma nova geometria vazia
     if (geometry && geometry.data.position.length) {
       geometry = undefined;
     }
   }
 
   function setGeometry() {
+    // Garantir que a geometria atual seja armazenada no geometries
     if (!geometry) {
       const position = [];
       const texcoord = [];
@@ -56,6 +54,7 @@ function parseOBJ(text) {
   }
 
   function addVertex(vert) {
+    // Adiciona um vértice no webglVertexData
     const ptn = vert.split("/");
     ptn.forEach((objIndexStr, i) => {
       if (!objIndexStr) {
@@ -64,8 +63,6 @@ function parseOBJ(text) {
       const objIndex = parseInt(objIndexStr);
       const index = objIndex + (objIndex >= 0 ? 0 : objVertexData[i].length);
       webglVertexData[i].push(...objVertexData[i][index]);
-      // if this is the position index (index 0) and we parsed
-      // vertex colors then copy the vertex colors to the webgl vertex color data
       if (i === 0 && objColors.length > 1) {
         geometry.data.color.push(...objColors[index]);
       }
@@ -74,7 +71,6 @@ function parseOBJ(text) {
 
   const keywords = {
     v(parts) {
-      // if there are more than 3 values here they are vertex colors
       if (parts.length > 3) {
         objPositions.push(parts.slice(0, 3).map(parseFloat));
         objColors.push(parts.slice(3).map(parseFloat));
@@ -86,7 +82,6 @@ function parseOBJ(text) {
       objNormals.push(parts.map(parseFloat));
     },
     vt(parts) {
-      // should check for missing v and extra w?
       objTexcoords.push(parts.map(parseFloat));
     },
     f(parts) {
@@ -98,10 +93,8 @@ function parseOBJ(text) {
         addVertex(parts[tri + 2]);
       }
     },
-    s: noop, // smoothing group
+    s: noop,
     mtllib(parts) {
-      // the spec says there can be multiple file here
-      // but I found one with a space in the filename
       materialLibs.push(parts.join(" "));
     },
     usemtl(parts, unparsedArgs) {
@@ -139,7 +132,6 @@ function parseOBJ(text) {
     handler(parts, unparsedArgs);
   }
 
-  // remove any arrays that have no entries.
   for (const geometry of geometries) {
     geometry.data = Object.fromEntries(
       Object.entries(geometry.data).filter(([, array]) => array.length > 0)
@@ -158,6 +150,7 @@ function parseMapArgs(unparsedArgs) {
 }
 
 function parseMTL(text) {
+  // Analisa um arquivo MTL e retorna as informações necessárias para renderizá-lo.
   const materials = {};
   let material;
 
@@ -166,7 +159,6 @@ function parseMTL(text) {
       material = {};
       materials[unparsedArgs] = material;
     },
-    /* eslint brace-style:0 */
     Ns(parts) {
       material.shininess = parseFloat(parts[0]);
     },
@@ -227,6 +219,7 @@ function parseMTL(text) {
 }
 
 function makeIndexIterator(indices) {
+  //Iterador para os índices
   let ndx = 0;
   const fn = () => indices[ndx++];
   fn.reset = () => {
@@ -237,6 +230,7 @@ function makeIndexIterator(indices) {
 }
 
 function makeUnindexedIterator(positions) {
+  //Iterador para as posições
   let ndx = 0;
   const fn = () => ndx++;
   fn.reset = () => {
@@ -249,6 +243,7 @@ function makeUnindexedIterator(positions) {
 const subtractVector2 = (a, b) => a.map((v, ndx) => v - b[ndx]);
 
 function generateTangents(position, texcoord, indices) {
+  //Gera as tangentes
   const getNextIndex = indices
     ? makeIndexIterator(indices)
     : makeUnindexedIterator(position);
