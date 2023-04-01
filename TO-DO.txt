@@ -4,11 +4,11 @@ Fazer uma vitrine onde o usuário pode olhar itens e comprar:
 [X] Deve ter controles para animar os objetos:
         - Rotação
         - Zoom
-[ ] Animação pré-definida da câmera usando curvas.
+[X] Animação pré-definida da câmera usando curvas.
 [X] Textura ou cor.
 [X] Use modelos que tenDham textura e modelos sem textura com cor única.
 [X] O usuário pode clicar no menu e trocar a textura e cor. Para as textura você pode abrir elas num editor de imagens e só trocar alguma cor na figura.
-[ ] Todos os objetos que o usuário comprar devem aparecer numa visão única, por exemplo, se for uma loja de carros todos os carros comprados devem aparecer dentro de uma garagem ou pátio que representa o carrinho de compras.
+[X] Todos os objetos que o usuário comprar devem aparecer numa visão única, por exemplo, se for uma loja de carros todos os carros comprados devem aparecer dentro de uma garagem ou pátio que representa o carrinho de compras.
 [X] O menu principal de navegação da página deve usar WebGL, mas não precisa ser 3D.
 [X] O fundo da página deve ser uma animação em WebGL.
 
