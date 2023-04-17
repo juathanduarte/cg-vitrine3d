@@ -30,5 +30,7 @@ A aplicação é desenvolvida utilizando as seguintes tecnologias:
 
 ## Autor
 
-Esta aplicação foi desenvolvida por Juathan Coelho Duarte. Entre em contato pelo e-mail juathanduarte13@gmail.com para mais informações.&nbsp;
+Esta aplicação foi desenvolvida por Juathan Coelho Duarte. Entre em contato pelo e-mail juathanduarte13@gmail.com para mais informações.
+&nbsp;
 Agradecimentos especiais a Rafael Piccin Torchelsen por todo suporte.
+&nbsp;
