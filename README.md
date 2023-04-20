@@ -2,6 +2,8 @@
 
 Esta é uma aplicação web que permite aos usuários explorarem uma vitrine virtual em 3D, onde podem olhar e comprar itens utilizando WebGL. A aplicação oferece uma experiência imersiva e interativa, permitindo aos usuários controlarem a visualização dos objetos, animar os objetos, mudar as texturas e cores além de adicionar itens ao carrinho de compras.
 
+- Link de acesso: https://3d-beer-shop.vercel.app/
+
 ## Recursos
 
 A aplicação oferece os seguintes recursos:
